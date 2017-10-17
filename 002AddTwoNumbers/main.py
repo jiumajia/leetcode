@@ -3,7 +3,7 @@ class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
-
+# for commit code ###
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
         """
@@ -11,11 +11,23 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        while l1 or l2:
-            print l1.val + l2.val
+        res = []
+        flag = 0
+        while l1 or l2 or flag:
+            c1 = l1.val if l1 else 0
+            c2 = l2.val if l2 else 0
+            val = c1 + c2 + flag
 
-            l1 = l1.next
-            l2 = l2.next
+            res.append(val % 10 )
+            flag = val // 10
+
+            if l1:
+                l1 = l1.next
+
+            if l2:
+                l2 = l2.next
+
+        return Solution.makeNodeList(res)
 
     @classmethod
     def makeNodeList(self, l_list):
@@ -31,10 +43,19 @@ class Solution(object):
             colloction.append(s)
 
         return colloction[-1]
+# for commit code ###
+
+    @classmethod
+    def interNodeList(clsself, n):
+        res = []
+        while n:
+            res.append(n.val)
+            n = n.next
+        print res
 
 if __name__ == "__main__":
-    l1 = Solution.makeNodeList([1, 2, 3, 4])
-    l2 = Solution.makeNodeList([4, 5, 9, 3])
+    l1 = Solution.makeNodeList([1])
+    l2 = Solution.makeNodeList([9, 9])
 
     res = Solution().addTwoNumbers(l1, l2)
-
+    Solution.interNodeList(res)
